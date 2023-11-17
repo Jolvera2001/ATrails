@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>ATrails Needs to use your location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>ATrails Needs to use your location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>ATrails Needs to use your location</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAD6optbJoFK20FBeuRxbUhw3P9tFDneYg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>109107105307</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jolvera.ATrails</string>
+	<key>PROJECT_ID</key>
+	<string>atrails</string>
+	<key>STORAGE_BUCKET</key>
+	<string>atrails.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:109107105307:ios:d9df3ba23d696b632132be</string>
+</dict>
+</plist>
