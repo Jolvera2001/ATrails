@@ -9,6 +9,7 @@ import Foundation
 
 struct Post: Codable {
     var userID: String
+    var username: String
     var userPFP: String
     var text: String
 }
