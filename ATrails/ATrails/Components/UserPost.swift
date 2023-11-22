@@ -38,6 +38,12 @@ struct UserPost: View {
         .background(Color("ABlue"))
         .padding(30)
         .cornerRadius(30)
+        .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.clear)
+                        .background(Color("ABlue"))
+                )
+                .cornerRadius(30)
     }
 }
 
