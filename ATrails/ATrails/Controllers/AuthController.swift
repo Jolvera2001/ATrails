@@ -17,8 +17,8 @@ class AuthController: ObservableObject {
     
     // registering
     func register(user: User, completion: @escaping (Error?) -> Void) {
-        var initialFollowers: [String] = [atrailsTeamID]
-        var initialFollowing: [String] = [atrailsTeamID]
+        let initialFollowers: [String] = [atrailsTeamID]
+        let initialFollowing: [String] = [atrailsTeamID]
         let userID = uniqueID.uuidString
         
         db.collection("users").addDocument(data: [

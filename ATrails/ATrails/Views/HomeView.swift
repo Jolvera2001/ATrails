@@ -13,7 +13,6 @@ struct HomeView: View {
     @EnvironmentObject var authController: AuthController
     @ObservedObject var homeController = HomeController()
     
-    
     var body: some View {
         ZStack {
             Rectangle()
@@ -21,10 +20,19 @@ struct HomeView: View {
                 .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                HStack{
-                    
+                ScrollView {
+                    VStack {
+                        ForEach(homeController.postArray) {post in
+                            UserPost(post: post)
+                        }
+                    }
                 }
+                .padding(.vertical)
             }
+        }
+        .onAppear {
+            // fetch the posts
+            homeController.fetchPosts(userID: "9BA73173-61F9-4576-A1AF-62748A06C5F9")
         }
     }
 }

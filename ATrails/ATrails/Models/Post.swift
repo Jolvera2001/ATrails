@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct Post: Codable {
+struct Post: Identifiable, Codable {
+    var id = UUID().uuidString
     var userID: String
     var username: String
     var userPFP: String
     var text: String
+    var postTimestamp: Date
     
     // optional things, URL's and Hikes
     var media: String?
