@@ -12,4 +12,8 @@ struct Post: Codable {
     var username: String
     var userPFP: String
     var text: String
+    
+    // optional things, URL's and Hikes
+    var media: String?
+    var hike: Hike?
 }

@@ -11,6 +11,8 @@ import CoreLocation
 
 struct HomeView: View {
     @EnvironmentObject var authController: AuthController
+    @ObservedObject var homeController = HomeController()
+    
     
     var body: some View {
         ZStack {
@@ -19,12 +21,9 @@ struct HomeView: View {
                 .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                Text("Hello world! \n This is the Home Page! \n \(authController.currentUser?.username ?? "No one") is logged in")
-                Text("Navbar?")
-                    .navigationBarTitle("Destination", displayMode: .inline)
-                    .navigationBarBackButtonHidden(true)
-                    .padding(30)
-                
+                HStack{
+                    
+                }
             }
         }
     }

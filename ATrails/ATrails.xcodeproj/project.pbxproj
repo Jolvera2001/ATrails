@@ -24,6 +24,7 @@
 		0DE20C902B06F5AC00502D57 /* Hike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE20C8F2B06F5AC00502D57 /* Hike.swift */; };
 		0DE20C942B06FFBE00502D57 /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE20C932B06FFBE00502D57 /* UserPost.swift */; };
 		0DED37E22B007A640032C5DC /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DED37E12B007A640032C5DC /* AuthController.swift */; };
+		0DF24D6F2B110F7F00566DD1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF24D6E2B110F7F00566DD1 /* HomeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		0DE20C8F2B06F5AC00502D57 /* Hike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hike.swift; sourceTree = "<group>"; };
 		0DE20C932B06FFBE00502D57 /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		0DED37E12B007A640032C5DC /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		0DF24D6E2B110F7F00566DD1 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				0DED37E12B007A640032C5DC /* AuthController.swift */,
+				0DF24D6E2B110F7F00566DD1 /* HomeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				0D53C29D2AFEBCDB00871149 /* MessageBubble.swift in Sources */,
 				0D497BC12AFE7D88007D6843 /* User.swift in Sources */,
 				0DE20C902B06F5AC00502D57 /* Hike.swift in Sources */,
+				0DF24D6F2B110F7F00566DD1 /* HomeController.swift in Sources */,
 				0D497BCE2AFE8542007D6843 /* IntroView.swift in Sources */,
 				0D497BD42AFE94BC007D6843 /* HomeView.swift in Sources */,
 				0DED37E22B007A640032C5DC /* AuthController.swift in Sources */,

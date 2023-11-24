@@ -13,37 +13,40 @@ struct UserPost: View {
     @EnvironmentObject var authController: AuthController
     
     var body: some View {
-        VStack(alignment: .center) {
-            HStack {
-                AsyncImage(url: URL(string: post.userPFP))
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
-                Text(post.username)
-                    .foregroundColor(.white)
-                    .font(.title)
+        ZStack {
+            VStack(alignment: .center) {
+                HStack {
+                    AsyncImage(url: URL(string: post.userPFP))
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .padding(.leading, 20)
+                        .padding(.trailing, 10)
+                    Text(post.username)
+                        .foregroundColor(.white)
+                        .font(.title)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                
+                // this is where either the media or hike will be, not both
+                // we can handle error checking that in the make a post view
+                // we may need to come back later to put this in
+                
+                HStack {
+                    Text(post.text)
+                        .padding(.bottom, 20)
+                        .padding(.horizontal, 20)
+                        .foregroundColor(.white)
+                        .font(.title3)
+                }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            HStack {
-                Text(post.text)
-                    .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
-                    .foregroundColor(.white)
-                    .font(.title3)
-            }
+            .frame(maxWidth: .infinity)
+            .background(Color("ABlue"))
+            .cornerRadius(10)
+            .padding(25)
+            .shadow(radius: 2)
         }
-        .frame(maxWidth: .infinity)
-        .background(Color("ABlue"))
-        .padding(30)
-        .cornerRadius(30)
-        .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.clear)
-                        .background(Color("ABlue"))
-                )
-                .cornerRadius(30)
     }
 }
 
