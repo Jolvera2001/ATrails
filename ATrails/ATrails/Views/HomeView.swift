@@ -32,7 +32,7 @@ struct HomeView: View {
         }
         .onAppear {
             // fetch the posts
-            homeController.fetchPosts(userID: "9BA73173-61F9-4576-A1AF-62748A06C5F9")
+            homeController.fetchPosts()
         }
     }
 }

@@ -13,20 +13,34 @@ class HomeController: ObservableObject {
     
     @Published var postArray: [Post] = []
     
-    func fetchPosts(userID: String) {
+    func fetchPosts() {
         // first we need to get who this user is following
-        let followerRef = db.collection("following").document(userID)
-        var following: [String]?
+        let currentUserID = AuthController().currentUser?.userID
+        let followerRef = db.collection("following").document(currentUserID!)
+        let postRef = db.collection("posts")
         
+        // getting their following list
         followerRef.getDocument { snapshot, error in
-            if let error = error {
+            if error != nil {
                 print("Error fetching list of followers from current user")
             } else if let snapshot = snapshot {
-                following = snapshot.data()?["followers"] as? [String]
+                if let following = snapshot.data()?["followers"] as? [String] {
+                    // we got the users, let's find their posts
+                    for user in following {
+                        let postQuery = postRef.whereField("userID", isEqualTo: user).limit(to: 3)
+                        postQuery.getDocuments { snapshot, error in
+                            if let error = error {
+                                print("Error in gathering following's posts")
+                            } else if let snapshot = snapshot {
+                                for document in snapshot.documents {
+                                    let post = Post(data: document.data())
+                                    self.postArray.append(post!)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        
-        // we got the followers, now we need to get their posts
-        
     }
 }
