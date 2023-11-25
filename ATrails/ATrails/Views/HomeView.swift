@@ -29,10 +29,11 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
-        }
-        .onAppear {
-            // fetch the posts
-            homeController.fetchPosts()
+            .onAppear {
+                // fetch the posts
+                homeController.setCurrentUser(userID: authController.currentUser?.userID)
+                homeController.fetchPosts()
+            }
         }
     }
 }

@@ -10,34 +10,38 @@ import Firebase
 
 class HomeController: ObservableObject {
     let db = Firestore.firestore()
+    var currentUserID: String?
+    
+    func setCurrentUser(userID: String?) {
+        self.currentUserID = userID
+    }
     
     @Published var postArray: [Post] = []
     
     func fetchPosts() {
         // first we need to get who this user is following
-        let currentUserID = AuthController().currentUser?.userID
-        let followerRef = db.collection("following").document(currentUserID!)
+        // let followerRef: Query = db.collection("following").whereField("userID", isEqualTo: currentUserID!)
         let postRef = db.collection("posts")
         
-        // getting their following list
-        followerRef.getDocument { snapshot, error in
-            if error != nil {
-                print("Error fetching list of followers from current user")
+        // getting following list
+        db.collection("following").whereField("userID", isEqualTo: currentUserID!).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching list of following from current user: \(error.localizedDescription)")
             } else if let snapshot = snapshot {
-                if let following = snapshot.data()?["followers"] as? [String] {
-                    // we got the users, let's find their posts
-                    for user in following {
-                        let postQuery = postRef.whereField("userID", isEqualTo: user).limit(to: 3)
-                        postQuery.getDocuments { snapshot, error in
-                            if let error = error {
-                                print("Error in gathering following's posts")
-                            } else if let snapshot = snapshot {
-                                for document in snapshot.documents {
-                                    let post = Post(data: document.data())
-                                    self.postArray.append(post!)
+                for userDocument in snapshot.documents {
+                    if let userID  = userDocument["userID"] as? String {
+                        let userPostQuery = postRef.whereField("userID", isEqualTo: userID).limit(to: 3)
+                        userPostQuery.getDocuments(completion: { (postSnapshot, postError) in
+                            if let error = postError {
+                                print("Error fetching posts for user \(userID): \(error.localizedDescription)")
+                            } else if let postSnapshot = postSnapshot {
+                                for document in postSnapshot.documents {
+                                    if let post = Post(data: document.data()) {
+                                        self.postArray.append(post)
+                                    }
                                 }
                             }
-                        }
+                        })
                     }
                 }
             }

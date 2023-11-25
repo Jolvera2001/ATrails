@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "HomeController.fetchPosts():HomeController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentUserID">
+            </PersistentString>
+            <PersistentString
+               value = "currentUserID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AuthController.login(username:password:completion:):AuthController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentUser">
+            </PersistentString>
+            <PersistentString
+               value = "userDocument[&quot;fullname&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

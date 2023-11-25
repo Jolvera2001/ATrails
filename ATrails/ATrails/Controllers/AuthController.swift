@@ -63,8 +63,7 @@ class AuthController: ObservableObject {
     func login(username: String, password: String, completion: @escaping (Bool) -> Void) {
         db.collection("users")
             .whereField("username", isEqualTo: username)
-            .getDocuments {
-                (querySnapshot, error) in
+            .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     print("Error getting docs: \(error)")
                     completion(false)
@@ -74,6 +73,8 @@ class AuthController: ObservableObject {
                         return
                     }
                     if let userDocument = documents.first, let storedPassword = userDocument["password"] as? String {
+                        print("Successfully got user logged in document")
+                        
                         if password == storedPassword {
                             let user = User(
                                 userID: userDocument["userID"] as? String ?? "",
