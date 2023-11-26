@@ -13,7 +13,7 @@ class AuthController: ObservableObject {
     let uniqueID = UUID()
     let atrailsTeamID = "FEC9A016-0762-4309-B765-164A7074889E"
     
-    @Published var currentUserID: String?
+    @Published var currentUser: User?
     
     // registering
     func register(user: User, completion: @escaping (Error?) -> Void) {
@@ -31,7 +31,7 @@ class AuthController: ObservableObject {
             "email": user.email
         ]) {error in
             if error == nil {
-                self.currentUserID = userID
+                self.currentUser = user
             }
             completion(error)
         }
@@ -78,7 +78,16 @@ class AuthController: ObservableObject {
                         print("Successfully got user logged in document")
                         
                         if password == storedPassword {
-                            self.currentUserID = userDocument["userID"] as? String
+                            let user = User(
+                                userID: userDocument["userID"] as? String ?? "",
+                                fullname: userDocument["fullname"] as? String ?? "",
+                                username: userDocument["username"] as? String ?? "",
+                                password: storedPassword,
+                                email: userDocument["email"] as? String ?? "",
+                                followers: userDocument["followers"] as? [String] ?? [],
+                                following: userDocument["following"] as? [String] ?? []
+                            )
+                            self.currentUser = user
                             completion(true)
                         } else {
                             completion(false)
