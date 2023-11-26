@@ -86,6 +86,7 @@ struct MapView: View {
 
 struct ProfileView: View {
     @EnvironmentObject var authController: AuthController
+    @ObservedObject var profileController = ProfileController()
     
     var body: some View {
         ZStack {
@@ -93,6 +94,17 @@ struct ProfileView: View {
             // Use the color gradient extension
                 .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
                 .edgesIgnoringSafeArea(.all)
+            VStack {
+                ProfileHeader()
+                ScrollView {
+                    VStack {
+                        ForEach(profileController.postArray) {post in
+                            UserPost(post: post)
+                        }
+                    }
+                }
+                .frame(minHeight: 200, maxHeight: 500)
+            }
         }
     }
 }
