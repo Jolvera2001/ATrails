@@ -3,6 +3,39 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in AuthController.login(username:password:completion:):AuthController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userDocument[&quot;fullname&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in HomeController.fetchPosts():HomeController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "documents.data()">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentUserID">
+            </PersistentString>
+            <PersistentString
+               value = "Post(data: documents.data())">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Post.init(data:):Post.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data[&quot;postTimestamp&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "HomeController.fetchPosts():HomeController.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,17 +43,6 @@
             </PersistentString>
             <PersistentString
                value = "currentUserID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in AuthController.login(username:password:completion:):AuthController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.currentUser">
-            </PersistentString>
-            <PersistentString
-               value = "userDocument[&quot;fullname&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -54,6 +54,6 @@ struct UserPost_Previews: PreviewProvider {
     static var previews: some View {
         let authController = AuthController()
         
-        UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is an ATrails post! Let's test to see how big we can make this post. Oh wow looks like it's handling it pretty well!", postTimestamp: Date()  )).environmentObject(authController)
+        UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is an ATrails post! Let's test to see how big we can make this post. Oh wow looks like it's handling it pretty well!"  )).environmentObject(authController)
     }
 }
