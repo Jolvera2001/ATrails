@@ -26,6 +26,8 @@ class AuthController: ObservableObject {
             "username": user.username,
             "fullname": user.fullname,
             "password": user.password,
+            "following": [atrailsTeamID],
+            "followers": [atrailsTeamID],
             "email": user.email
         ]) {error in
             if error == nil {
@@ -81,7 +83,9 @@ class AuthController: ObservableObject {
                                 fullname: userDocument["fullname"] as? String ?? "",
                                 username: userDocument["username"] as? String ?? "",
                                 password: storedPassword,
-                                email: userDocument["email"] as? String ?? ""
+                                email: userDocument["email"] as? String ?? "",
+                                followers: userDocument["followers"] as? [String] ?? [],
+                                following: userDocument["following"] as? [String] ?? []
                             )
                             self.currentUser = user
                             completion(true)

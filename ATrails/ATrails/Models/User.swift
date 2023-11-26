@@ -13,6 +13,10 @@ struct User: Codable {
     var username: String
     var password: String
     var email: String
+    
+    var followers: [String]
+    var following: [String]
+    
     var profilePictureURL: String?
     var profileBio: String?
 }
