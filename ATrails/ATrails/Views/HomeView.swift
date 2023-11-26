@@ -19,20 +19,25 @@ struct HomeView: View {
             // Use the color gradient extension
                 .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
                 .edgesIgnoringSafeArea(.all)
-            VStack {
-                ScrollView {
-                    VStack {
-                        ForEach(homeController.postArray) {post in
-                            UserPost(post: post)
+            
+            if homeController.isLoading {
+                ProgressView("Loading...")
+            } else {
+                VStack {
+                    ScrollView {
+                        VStack {
+                            ForEach(homeController.postArray) {post in
+                                UserPost(post: post)
+                            }
                         }
                     }
+                    .padding(.vertical)
                 }
-                .padding(.vertical)
-            }
-            .onAppear {
-                // fetch the posts
-                homeController.setCurrentUser(userID: authController.currentUser?.userID)
-                homeController.fetchPosts()
+                .onAppear {
+                    // fetch the posts
+                    homeController.setCurrentUser(userID: authController.currentUser?.userID)
+                    homeController.fetchPosts()
+                }
             }
         }
     }

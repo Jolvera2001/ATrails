@@ -10,6 +10,7 @@ import Firebase
 
 class HomeController: ObservableObject {
     let db = Firestore.firestore()
+    var isLoading: Bool = false
     var currentUserID: String?
     
     func setCurrentUser(userID: String?) {
@@ -19,6 +20,12 @@ class HomeController: ObservableObject {
     @Published var postArray: [Post] = []
     
     func fetchPosts() {
+        // we are loading
+        isLoading.toggle()
+        
+        // let's empty the posts we have
+        postArray = []
+        
         let postRef = db.collection("posts")
         let userRef = db.collection("users").document(currentUserID!)
         
@@ -47,5 +54,8 @@ class HomeController: ObservableObject {
                 print("error getting list of people this user is following")
             }
         }
+        
+        // we are no longer loading
+        isLoading.toggle()
     }
 }
