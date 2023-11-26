@@ -11,9 +11,9 @@ import Firebase
 class AuthController: ObservableObject {
     let db = Firestore.firestore()
     let uniqueID = UUID()
-    let atrailsTeamID = "0579138B-3592-4BC9-83A8-D8EF75DEE704"
+    let atrailsTeamID = "FEC9A016-0762-4309-B765-164A7074889E"
     
-    @Published var currentUser: User?
+    @Published var currentUserID: String?
     
     // registering
     func register(user: User, completion: @escaping (Error?) -> Void) {
@@ -21,7 +21,7 @@ class AuthController: ObservableObject {
         let initialFollowing: [String] = [atrailsTeamID]
         let userID = uniqueID.uuidString
         
-        db.collection("users").addDocument(data: [
+        db.collection("users").document(userID).setData([
             "userID": userID,
             "username": user.username,
             "fullname": user.fullname,
@@ -31,7 +31,7 @@ class AuthController: ObservableObject {
             "email": user.email
         ]) {error in
             if error == nil {
-                self.currentUser = user
+                self.currentUserID = userID
             }
             completion(error)
         }
@@ -78,16 +78,7 @@ class AuthController: ObservableObject {
                         print("Successfully got user logged in document")
                         
                         if password == storedPassword {
-                            let user = User(
-                                userID: userDocument["userID"] as? String ?? "",
-                                fullname: userDocument["fullname"] as? String ?? "",
-                                username: userDocument["username"] as? String ?? "",
-                                password: storedPassword,
-                                email: userDocument["email"] as? String ?? "",
-                                followers: userDocument["followers"] as? [String] ?? [],
-                                following: userDocument["following"] as? [String] ?? []
-                            )
-                            self.currentUser = user
+                            self.currentUserID = userDocument["userID"] as? String
                             completion(true)
                         } else {
                             completion(false)
