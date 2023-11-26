@@ -65,7 +65,7 @@ struct IntroView: View {
 }
 
 struct RegistrationView: View {
-    @State private var user = User(userID: "", fullname: "", username: "", password: "", email: "")
+    @State private var user = User(userID: "", fullname: "", username: "", password: "", email: "", followers: [], following: [])
     @Binding var isRegistered: Bool
     @EnvironmentObject var authController: AuthController
     
