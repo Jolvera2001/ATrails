@@ -98,8 +98,16 @@ struct ProfileView: View {
                 ProfileHeader()
                 ScrollView {
                     VStack {
-                        ForEach(profileController.postArray) {post in
-                            UserPost(post: post)
+                        if profileController.postArray.isEmpty {
+                            Spacer().frame(height: 150)
+                            Text("You have no posts yet!")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .frame(maxWidth: 270)
+                        } else {
+                            ForEach(profileController.postArray) {post in
+                                UserPost(post: post)
+                            }
                         }
                     }
                 }

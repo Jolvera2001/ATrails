@@ -31,14 +31,15 @@ class HomeController: ObservableObject {
         
         // getting user's followers using their ID
         userRef.getDocument(source: .server) { (document, error) in
-            if let document = document {
+            if let error = error {
+                print("There was an error fetching this user's followers: \(error.localizedDescription)")
+            } else if let document = document {
                 let followingList = document.get("following") as? [String]
-                
                 // now we iterate through the following list
                 for userID in followingList! {
                     postRef.whereField("userID", isEqualTo: userID).getDocuments(source: .server) { (snapshot, error) in
                         if let error = error {
-                            print("There was an error in fetching this user's posts: \(error)")
+                            print("There was an error in fetching this user's posts: \(error.localizedDescription)")
                         } else if let snapshot = snapshot {
                             for documents in snapshot.documents {
                                 // creating a post for each doc
