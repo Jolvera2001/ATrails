@@ -21,17 +21,16 @@ struct HomeView: View {
                 .edgesIgnoringSafeArea(.all)
             
             if homeController.isLoading {
+                Spacer()
                 ProgressView("Loading...")
+                    .foregroundColor(.white)
+                Spacer()
             } else {
                 VStack {
                     ScrollView {
                         VStack {
-                            if homeController.postArray.isEmpty {
-                                Text("No posts here!")
-                            } else {
-                                ForEach(homeController.postArray) {post in
-                                    UserPost(post: post)
-                                }
+                            ForEach(homeController.postArray) {post in
+                                UserPost(post: post)
                             }
                         }
                     }
@@ -42,6 +41,14 @@ struct HomeView: View {
                     homeController.setCurrentUser(userID: authController.currentUser?.userID)
                     homeController.fetchPosts()
                 }
+                VStack(spacing: 5) {
+                    Button(action: {}){
+                        Label("", systemImage: "plus.circle.fill")
+                            .padding(25)
+                            .font(.system(size: 50))
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         }
     }
@@ -115,7 +122,7 @@ struct ProfileView: View {
                         }
                     }
                 }
-                .frame(minHeight: 200, maxHeight: 500)
+                .frame(minHeight: 200, maxHeight: 550)
             }
             .onAppear {
                 // fetch the posts

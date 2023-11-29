@@ -75,8 +75,8 @@ struct ProfileHeader: View {
             } else {
                 Text("Error with reading bio from DB")
             }
+            Divider()
         }
-        .border(.black)
     }
 }
 
