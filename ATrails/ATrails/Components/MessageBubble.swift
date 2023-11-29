@@ -43,7 +43,7 @@ struct MessageBubble: View {
 struct MessageBubble_Previews: PreviewProvider {
     static var previews: some View {
         let authController = AuthController()
-        authController.currentUser = User(userID: "admin", fullname: "", username: "", password: "", email: "", followers: [], following: [])
+        authController.currentUser = User(userID: "admin", fullname: "", username: "", password: "", email: "", profileBio: "Something", followers: [], following: [])
         
        return VStack{
             MessageBubble(message: Message(userID: "admin", messageText: "Hello I am the admin. I should be on the right", messageTimestamp: Date())).environmentObject(authController)

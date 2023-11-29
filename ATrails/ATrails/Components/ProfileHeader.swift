@@ -84,7 +84,7 @@ struct ProfileHeader_Previews: PreviewProvider {
     static var previews: some View {
         let authController = AuthController()
         
-        authController.currentUser = User(userID: "12345", fullname: "ATrails Team", username: "AtrailsTeam", password: "12345", email: "AtrailsTeam@gmail.com", followers: ["something", "something"], following: ["something"], profilePictureURL: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", profileBio: "Hi There! This is a test for the profile section of this app! Hoping that this will be sometihng that could be useful as we move forward!")
+        authController.currentUser = User(userID: "12345", fullname: "ATrails Team", username: "AtrailsTeam", password: "12345", email: "AtrailsTeam@gmail.com",  profileBio: "Hi There! This is a test for the profile section of this app! Hoping that this will be sometihng that could be useful as we move forward!", followers: ["something", "something"], following: ["something"], profilePictureURL: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg")
         
         return ProfileHeader().environmentObject(authController)
     }

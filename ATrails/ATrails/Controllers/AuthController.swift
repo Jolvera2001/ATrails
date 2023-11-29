@@ -28,6 +28,7 @@ class AuthController: ObservableObject {
             "password": user.password,
             "following": [atrailsTeamID],
             "followers": [atrailsTeamID],
+            "profileBio": user.profileBio,
             "email": user.email
         ]) {error in
             if error == nil {
@@ -84,6 +85,7 @@ class AuthController: ObservableObject {
                                 username: userDocument["username"] as? String ?? "",
                                 password: storedPassword,
                                 email: userDocument["email"] as? String ?? "",
+                                profileBio: userDocument["profileBio"] as? String ?? "",
                                 followers: userDocument["followers"] as? [String] ?? [],
                                 following: userDocument["following"] as? [String] ?? []
                             )
