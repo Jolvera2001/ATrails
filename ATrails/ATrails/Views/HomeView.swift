@@ -26,8 +26,12 @@ struct HomeView: View {
                 VStack {
                     ScrollView {
                         VStack {
-                            ForEach(homeController.postArray) {post in
-                                UserPost(post: post)
+                            if homeController.postArray.isEmpty {
+                                Text("No posts here!")
+                            } else {
+                                ForEach(homeController.postArray) {post in
+                                    UserPost(post: post)
+                                }
                             }
                         }
                     }
@@ -113,6 +117,11 @@ struct ProfileView: View {
                 }
                 .frame(minHeight: 200, maxHeight: 500)
             }
+            .onAppear {
+                // fetch the posts
+                profileController.setCurrentUser(userID: authController.currentUser?.userID)
+                profileController.fetchPosts()
+            }
         }
     }
 }
@@ -172,7 +181,11 @@ struct MapView_Previews: PreviewProvider {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView().environmentObject(AuthController())
+        let authController = AuthController()
+        
+        authController.currentUser = User(userID: "12345", fullname: "ATrails Team", username: "AtrailsTeam", password: "12345", email: "AtrailsTeam@gmail.com", followers: ["something", "something"], following: ["something"], profileBio: "Hi There! This is a test for the profile section of this app! Hoping that this will be sometihng that could be useful as we move forward!")
+        
+        return ProfileView().environmentObject(AuthController())
     }
 }
 
