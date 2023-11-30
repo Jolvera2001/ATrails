@@ -60,9 +60,11 @@ struct HomeView: View {
 
 struct GroupView: View {
     @EnvironmentObject var authController: AuthController
+    @ObservedObject var groupController = GroupController()
+    
     @State var groupSearch: Bool = true
     @State var groupsIn: Bool = false
-    
+    @State var searchString = ""
     
     var body: some View {
         ZStack {
@@ -78,7 +80,7 @@ struct GroupView: View {
                             .foregroundColor(.white)
                             .font(.title2)
                     }
-                    Divider()
+                    Divider().overlay(.white)
                     Button {
                     } label: {
                         Text("Group Chat")
@@ -86,7 +88,6 @@ struct GroupView: View {
                             .font(.title2)
                     }
                 }
-                .frame(width: .infinity)
             }
             .frame(maxWidth: .infinity, maxHeight: 200, alignment: .top)
             VStack {
