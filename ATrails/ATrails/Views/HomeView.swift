@@ -38,8 +38,12 @@ struct HomeView: View {
                 }
                 .onAppear {
                     // fetch the posts
-                    homeController.setCurrentUser(userID: authController.currentUser?.userID)
-                    homeController.fetchPosts()
+                    if authController.currentUser != nil {
+                        homeController.setCurrentUser(userID: authController.currentUser?.userID)
+                        homeController.fetchPosts()
+                    } else {
+                        // for preview purposes
+                    }
                 }
                 VStack(spacing: 5) {
                     Button(action: {}){
@@ -56,6 +60,9 @@ struct HomeView: View {
 
 struct GroupView: View {
     @EnvironmentObject var authController: AuthController
+    @State var groupSearch: Bool = true
+    @State var groupsIn: Bool = false
+    
     
     var body: some View {
         ZStack {
@@ -63,6 +70,32 @@ struct GroupView: View {
             // Use the color gradient extension
                 .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
                 .edgesIgnoringSafeArea(.all)
+            VStack {
+                HStack(spacing: 25) {
+                    Button {
+                    } label: {
+                        Text("Group Search")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                    }
+                    Divider()
+                    Button {
+                    } label: {
+                        Text("Group Chat")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                    }
+                }
+                .frame(width: .infinity)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 200, alignment: .top)
+            VStack {
+                if groupSearch {
+                    // show the groupSearch view
+                } else if groupsIn {
+                    // show the groupsIn View
+                }
+            }
         }
     }
 }
@@ -126,8 +159,12 @@ struct ProfileView: View {
             }
             .onAppear {
                 // fetch the posts
-                profileController.setCurrentUser(userID: authController.currentUser?.userID)
-                profileController.fetchPosts()
+                if authController.currentUser != nil {
+                    profileController.setCurrentUser(userID: authController.currentUser?.userID)
+                    profileController.fetchPosts()
+                } else {
+                    // preview purposes
+                }
             }
         }
     }
@@ -188,11 +225,7 @@ struct MapView_Previews: PreviewProvider {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        let authController = AuthController()
-        
-        authController.currentUser = User(userID: "12345", fullname: "ATrails Team", username: "AtrailsTeam", password: "12345", email: "AtrailsTeam@gmail.com",  profileBio: "Hi There! This is a test for the profile section of this app! Hoping that this will be sometihng that could be useful as we move forward!", followers: ["something", "something"], following: ["something"])
-        
-        return ProfileView().environmentObject(AuthController())
+        ProfileView().environmentObject(AuthController())
     }
 }
 

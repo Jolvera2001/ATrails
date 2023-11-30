@@ -77,6 +77,7 @@ struct ProfileHeader: View {
             }
             Divider()
         }
+        .padding(5)
     }
 }
 
