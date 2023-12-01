@@ -10,4 +10,6 @@ import Firebase
 
 class MakePostController: ObservableObject {
     
+    
+    
 }
