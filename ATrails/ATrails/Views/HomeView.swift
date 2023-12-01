@@ -46,7 +46,7 @@ struct HomeView: View {
                     }
                 }
                 VStack(spacing: 5) {
-                    Button(action: {}){
+                    Button(action: { }){
                         Label("", systemImage: "plus.circle.fill")
                             .padding(25)
                             .font(.system(size: 50))
@@ -73,12 +73,14 @@ struct GroupView: View {
                 .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
                 .edgesIgnoringSafeArea(.all)
             VStack {
+                Divider()
                 HStack(spacing: 25) {
                     Button {
                     } label: {
                         Text("Group Search")
                             .foregroundColor(.white)
                             .font(.title2)
+                            .frame(maxWidth: 100)
                     }
                     Divider().overlay(.white)
                     Button {
@@ -86,27 +88,34 @@ struct GroupView: View {
                         Text("Group Chat")
                             .foregroundColor(.white)
                             .font(.title2)
+                            .frame(maxWidth: 100)
+                    }
+                }
+                .frame(maxHeight: 100)
+                VStack {
+                    if groupSearch {
+                        // show the groupSearch view
+                        GroupViews()
+                    } else if groupsIn {
+                        // show the groupsIn View
+                        GroupChats()
                     }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: 200, alignment: .top)
-            VStack {
-                if groupSearch {
-                    // show the groupSearch view
-                } else if groupsIn {
-                    // show the groupsIn View
-                }
-            }
+            .frame(maxHeight: .infinity)
         }
     }
 }
 
 struct MapView: View {
     @EnvironmentObject var authController: AuthController
+    @ObservedObject var mapController = MapController()
+    
     @State var region = MKCoordinateRegion(
-        center: .init(latitude: 37.334_900,longitude: -122.009_020),
-        span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        center: .init(latitude: 30.227173695531633, longitude: -97.75500147698011),
+        span: .init(latitudeDelta: 0.08, longitudeDelta: 0.08)
     )
+    @State var place: String = ""
     
     let locationManager = CLLocationManager()
     
@@ -125,6 +134,25 @@ struct MapView: View {
                         locationManager.requestWhenInUseAuthorization()
                     }
             }
+            VStack {
+                HStack {
+                    Button {
+                    } label: {
+                        Label("", systemImage: "map.circle.fill")
+                    }
+                    .padding(.leading)
+                    .font(.largeTitle)
+                    .foregroundColor(Color("ABlue"))
+                    
+                    TextField("Search Places", text: $place)
+                        .background(Color.white.opacity(0.85))
+                        .cornerRadius(8)
+                        .frame(maxWidth: 350)
+                        .padding(.trailing, 15)
+                        .font(.title3)
+                }
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
         }
     }
 }
