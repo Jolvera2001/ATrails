@@ -130,6 +130,6 @@ struct UtilityViews_Previews: PreviewProvider {
 
 struct MakePost_Previews: PreviewProvider {
     static var previews: some View {
-        MakePost().environmentObject(AuthController())
+        MakePost(homeController: HomeController()).environmentObject(AuthController())
     }
 }
