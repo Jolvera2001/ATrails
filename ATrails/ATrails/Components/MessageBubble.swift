@@ -15,6 +15,8 @@ struct MessageBubble: View {
     
     var body: some View {
         VStack( alignment: message.userID != authController.currentUser?.userID ? .leading : .trailing) {
+            
+            Text(message.username != authController.currentUser?.username ? "\(message.username)" : "")
             HStack {
                 Text(message.messageText)
                     .padding(13)
@@ -43,11 +45,11 @@ struct MessageBubble: View {
 struct MessageBubble_Previews: PreviewProvider {
     static var previews: some View {
         let authController = AuthController()
-        authController.currentUser = User(userID: "admin", fullname: "", username: "", password: "", email: "", profileBio: "Something", followers: [], following: [])
+        authController.currentUser = User(userID: "admin", fullname: "", username: "Scrimblo", password: "", email: "", profileBio: "Something", followers: [], following: [])
         
        return VStack{
-            MessageBubble(message: Message(userID: "admin", messageText: "Hello I am the admin. I should be on the right", messageTimestamp: Date())).environmentObject(authController)
-           MessageBubble(message: Message(userID: "notAdmin", messageText: "Hello I am not the admin", messageTimestamp: Date())).environmentObject(authController)
+           MessageBubble(message: Message(username: "Scrimblo", userID: "admin", messageText: "Hello I am the admin. I should be on the right", messageTimestamp: Date())).environmentObject(authController)
+           MessageBubble(message: Message(username: "Scribmla", userID: "notAdmin", messageText: "Hello I am not the admin", messageTimestamp: Date())).environmentObject(authController)
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct Message: Codable {
+    var username: String
     var userID: String
     var messageText: String
     var messageTimestamp: Date
