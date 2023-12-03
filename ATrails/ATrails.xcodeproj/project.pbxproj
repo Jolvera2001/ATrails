@@ -23,9 +23,7 @@
 		0DCCEF5E2B13EC1B002D2E39 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCCEF5D2B13EC1B002D2E39 /* UtilityViews.swift */; };
 		0DCCEF602B13ECA7002D2E39 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCCEF5F2B13ECA7002D2E39 /* ProfileHeader.swift */; };
 		0DCCEF622B140254002D2E39 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCCEF612B140254002D2E39 /* ProfileController.swift */; };
-		0DD5FAE02B1956A900F70A63 /* GroupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5FADF2B1956A900F70A63 /* GroupViews.swift */; };
 		0DD5FAE22B1969BD00F70A63 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5FAE12B1969BD00F70A63 /* MapController.swift */; };
-		0DD5FAE42B1983E800F70A63 /* MakePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5FAE32B1983E800F70A63 /* MakePostController.swift */; };
 		0DD5FAE62B19855E00F70A63 /* GroupItemSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5FAE52B19855E00F70A63 /* GroupItemSearch.swift */; };
 		0DE20C8C2B06F4D800502D57 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE20C8B2B06F4D800502D57 /* Group.swift */; };
 		0DE20C8E2B06F53300502D57 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE20C8D2B06F53300502D57 /* Post.swift */; };
@@ -52,9 +50,7 @@
 		0DCCEF5D2B13EC1B002D2E39 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		0DCCEF5F2B13ECA7002D2E39 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		0DCCEF612B140254002D2E39 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
-		0DD5FADF2B1956A900F70A63 /* GroupViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViews.swift; sourceTree = "<group>"; };
 		0DD5FAE12B1969BD00F70A63 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
-		0DD5FAE32B1983E800F70A63 /* MakePostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePostController.swift; sourceTree = "<group>"; };
 		0DD5FAE52B19855E00F70A63 /* GroupItemSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItemSearch.swift; sourceTree = "<group>"; };
 		0DE20C8B2B06F4D800502D57 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		0DE20C8D2B06F53300502D57 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -137,7 +133,6 @@
 				0D497BCD2AFE8542007D6843 /* IntroView.swift */,
 				0D497BD32AFE94BC007D6843 /* HomeView.swift */,
 				0DCCEF5D2B13EC1B002D2E39 /* UtilityViews.swift */,
-				0DD5FADF2B1956A900F70A63 /* GroupViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,7 +156,6 @@
 				0DCCEF612B140254002D2E39 /* ProfileController.swift */,
 				D48507B32B1905380065682F /* GroupController.swift */,
 				0DD5FAE12B1969BD00F70A63 /* MapController.swift */,
-				0DD5FAE32B1983E800F70A63 /* MakePostController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -256,11 +250,9 @@
 				0DD5FAE22B1969BD00F70A63 /* MapController.swift in Sources */,
 				0DCCEF5E2B13EC1B002D2E39 /* UtilityViews.swift in Sources */,
 				0DCCEF602B13ECA7002D2E39 /* ProfileHeader.swift in Sources */,
-				0DD5FAE42B1983E800F70A63 /* MakePostController.swift in Sources */,
 				0DD5FAE62B19855E00F70A63 /* GroupItemSearch.swift in Sources */,
 				0D497BCE2AFE8542007D6843 /* IntroView.swift in Sources */,
 				0D497BD42AFE94BC007D6843 /* HomeView.swift in Sources */,
-				0DD5FAE02B1956A900F70A63 /* GroupViews.swift in Sources */,
 				0DED37E22B007A640032C5DC /* AuthController.swift in Sources */,
 				D48507B42B1905380065682F /* GroupController.swift in Sources */,
 				0D497BAE2AFE7C73007D6843 /* ATrailsApp.swift in Sources */,

@@ -20,7 +20,7 @@ struct UtilityViews: View {
 
 struct MakePost: View {
     @EnvironmentObject var authController: AuthController
-    @ObservedObject var makePostController = MakePostController() 
+    @ObservedObject var homeController: HomeController
     
     @State private var textString: String = ""
     

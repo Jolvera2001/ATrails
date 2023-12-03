@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct Group: Codable {
+struct Group: Codable, Identifiable {
+    var id = UUID().uuidString
     var owner: String // userID
     var groupName: String
-    var members: [User]?
+    var members: [String]?
     var messages: [Message]?
 }

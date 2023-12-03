@@ -62,9 +62,12 @@ struct GroupView: View {
     @EnvironmentObject var authController: AuthController
     @ObservedObject var groupController = GroupController()
     
-    @State var groupSearch: Bool = true
-    @State var groupsIn: Bool = false
+    // 0 = group search, 1 = group chat
+    @State var selectedTab = 0
     @State var searchString = ""
+    
+    // for group search bar
+    @State var groupQuery = ""
     
     var body: some View {
         ZStack {
@@ -74,33 +77,84 @@ struct GroupView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Divider()
-                HStack(spacing: 25) {
-                    Button {
-                    } label: {
+                HStack() {
+                    Button(action: {
+                        self.selectedTab = 0
+                    }) {
                         Text("Group Search")
                             .foregroundColor(.white)
                             .font(.title2)
-                            .frame(maxWidth: 100)
+                            .frame(maxWidth: .infinity, maxHeight: 100)
+                            .background(
+                                LinearGradient(
+                                gradient: Gradient(colors: [Color.blue.opacity(selectedTab == 0 ? 0.6 : 0.2), Color.blue.opacity(selectedTab == 0 ? 0.2 : 0.1)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                                )
+                            )
                     }
-                    Divider().overlay(.white)
-                    Button {
-                    } label: {
+                    Button(action: {
+                        self.selectedTab = 1
+                    }) {
                         Text("Group Chat")
                             .foregroundColor(.white)
                             .font(.title2)
-                            .frame(maxWidth: 100)
+                            .frame(maxWidth: .infinity, maxHeight: 100)
+                            .background(
+                                LinearGradient(
+                                gradient: Gradient(colors: [Color.blue.opacity(selectedTab == 1 ? 0.6 : 0.2), Color.blue.opacity(selectedTab == 1 ? 0.2 : 0.1)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                                )
+                            )
                     }
                 }
                 .frame(maxHeight: 100)
                 VStack {
-                    if groupSearch {
-                        // show the groupSearch view
-                        GroupViews()
-                    } else if groupsIn {
-                        // show the groupsIn View
-                        GroupChats()
+                    if self.selectedTab == 0 {
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .padding(.horizontal, 10)
+                                .foregroundColor(.white)
+                                .font(.title2)
+                            TextField("Search Groups", text: $groupQuery)
+                                .padding()
+                                .font(.body)
+                                .background(Color.white.opacity(0.75))
+                                .foregroundColor(.black)
+                                .cornerRadius(10)
+                                .frame(maxWidth: 300)
+                        }
+                        Button(action: {groupController.searchGroups(groupQuery: groupQuery)}) {
+                            Text("Search")
+                                .foregroundColor(.white)
+                                .font(.title2)
+                        }
+                        .contentShape(Rectangle()) // Defines the tappable area shape
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("ABlue"), lineWidth: 2)
+                        )
+                        .frame(maxWidth: 100, maxHeight: 40) // Define the button's frame
+                        .background(Color("ABlue"))
+                        .cornerRadius(10)
+                        .padding()
+                        
+                        ScrollView {
+                            // populate with controller function
+                            VStack {
+                                ForEach(groupController.groupItemSearchArray) { groupItem in
+                                    GroupItemSearch(groupController: groupController, groupData: groupItem)
+                                }
+                            }
+                        }
+                    } else {
+                        ScrollView {
+                            // populate with controller function
+                        }
                     }
                 }
+                .padding(.top)
             }
             .frame(maxHeight: .infinity)
         }
