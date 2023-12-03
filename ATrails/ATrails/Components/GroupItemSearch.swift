@@ -22,13 +22,17 @@ struct GroupItemSearch: View {
                 Spacer().frame(width: 50)
                 if  let members: [String] = groupData.members,
                     members.contains(authController.currentUser!.username) {
-                    Button(action: {groupController.removeUserFromGroup(groupName: groupData.groupName)}) {
+                    Button(action: {
+                        groupController.removeUserFromGroup(groupName: groupData.groupName, userToRemove: authController.currentUser!.username)
+                    }) {
                         Text("Leave")
                             .frame(maxWidth: 100, maxHeight: 45)
                             .padding(.horizontal, 20)
                     }
                 } else {
-                    Button(action: {groupController.addUserToGroup(groupName: groupData.groupName)}) {
+                    Button(action: {
+                        groupController.addUserToGroup(groupName: groupData.groupName, userToAdd: authController.currentUser!.username)
+                    }) {
                         Text("Join")
                             .frame(maxWidth: 100, maxHeight: 45)
                             .padding(.horizontal, 20)

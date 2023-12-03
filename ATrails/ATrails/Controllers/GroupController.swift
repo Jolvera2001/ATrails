@@ -44,12 +44,12 @@ class GroupController: ObservableObject {
         }
     }
     
-    func addUserToGroup(groupName: String) {
-        
+    func addUserToGroup(groupName: String, userToAdd: String) {
+        // we just add the user to the members list
     }
     
-    func removeUserFromGroup(groupName: String) {
-        
+    func removeUserFromGroup(groupName: String, userToRemove: String) {
+        // we just need to remove the user from the members list
     }
     
     // both views would need their own functions
