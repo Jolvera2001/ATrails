@@ -23,7 +23,25 @@ class GroupController: ObservableObject {
         // debugging purposes
         // print("\(groupQuery), is your query")
         
+        //empty group
+        groupItemSearchArray = []
         
+        let groupRef = db.collection("groups")
+            .whereField("groupName", isGreaterThanOrEqualTo: groupQuery)
+            .whereField("groupName", isLessThanOrEqualTo: groupQuery)
+        
+        groupRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("error with query: \(error.localizedDescription)")
+            } else if let querySnapshot = querySnapshot {
+                for documents in querySnapshot.documents {
+                    let groupSearchItem = Group(data: documents.data())
+                    
+                    // adding it to search list
+                    self.groupItemSearchArray.append(groupSearchItem ?? Group(owner: "Something is wrong", groupName: "Something went wrong"))
+                }
+            }
+        }
     }
     
     func addUserToGroup(groupName: String) {
