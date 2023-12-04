@@ -22,9 +22,17 @@ struct IntroView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .leading) {
-                    Text("Welcome to ATrails!")
+                    Image("ATrails-logos_white")
+                        .frame(maxWidth: .infinity)
+                    Text("Welcome To ATrails")
                         .foregroundColor(.white)
-                    Text("ATrails is a hiking app meant to bring people together on adventures")
+                        .font(.title)
+                        .frame(maxWidth: .infinity)
+                    Spacer().frame(height: 160)
+                    Text("Get Started By Logging In Or Registering Below")
+                        .padding()
+                        .font(.body)
+                        .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
                     Spacer()
                     NavigationLink(destination: RegistrationView(isRegistered: $isRegistered)) {

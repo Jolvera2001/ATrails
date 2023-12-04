@@ -129,6 +129,17 @@ struct MakePost: View {
     }
 }
 
+struct ProfileOptions: View {
+    @EnvironmentObject var authController: AuthController
+    var body: some View {
+        ZStack {
+            
+        }
+    }
+}
+
+// *********************** HELPER METHODS ****************************************************
+
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) private var presentationMode
@@ -177,5 +188,11 @@ struct UtilityViews_Previews: PreviewProvider {
 struct MakePost_Previews: PreviewProvider {
     static var previews: some View {
         MakePost().environmentObject(AuthController())
+    }
+}
+
+struct ProfileOptions_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView().environmentObject(AuthController())
     }
 }

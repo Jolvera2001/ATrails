@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ProfileHeader: View {
     @EnvironmentObject var authController: AuthController
+    @State var isInProfileOptions = false
     
     var body: some View {
         VStack {
             HStack(alignment: .top) {
                 Button {
-                    print("Edit Profile Button was tapped")
+                    isInProfileOptions.toggle()
                 } label: {
                     Label("", systemImage: "gearshape.fill")
                         .font(.title)
@@ -22,6 +23,10 @@ struct ProfileHeader: View {
                         .padding(.top, 10)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                }.fullScreenCover(isPresented: $isInProfileOptions) {
+                    NavigationView {
+                        ProfileOptions()
+                    }
                 }
             }
             
