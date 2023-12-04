@@ -12,8 +12,8 @@ class GroupController: ObservableObject {
     let db = Firestore.firestore()
     var currentUserID: String?
     
-    var groupArray: [Group] = []
-    var groupItemSearchArray: [Group] = []
+    @Published var groupArray: [Group] = []
+    @Published var groupItemSearchArray: [Group] = []
     
     func setCurrentUserID(userID: String?) {
         self.currentUserID = userID
@@ -27,7 +27,6 @@ class GroupController: ObservableObject {
         groupItemSearchArray = []
         
         let groupRef = db.collection("groups")
-            .whereField("groupName", isGreaterThanOrEqualTo: groupQuery)
             .whereField("groupName", isLessThanOrEqualTo: groupQuery)
         
         groupRef.getDocuments { (querySnapshot, error) in
@@ -46,10 +45,24 @@ class GroupController: ObservableObject {
     
     func addUserToGroup(groupName: String, userToAdd: String) {
         // we just add the user to the members list
+        let groupDoc = db.collection("groups").document(groupName)
+        
+        groupDoc.updateData([
+            "members": FieldValue.arrayUnion([groupName])
+        ])
+        
+        searchGroups(groupQuery: groupName)
     }
     
     func removeUserFromGroup(groupName: String, userToRemove: String) {
         // we just need to remove the user from the members list
+        let groupDoc = db.collection("groups").document(groupName)
+        
+        groupDoc.updateData([
+            "members": FieldValue.arrayRemove([groupName])
+        ])
+        
+        searchGroups(groupQuery: groupName)
     }
     
     // both views would need their own functions

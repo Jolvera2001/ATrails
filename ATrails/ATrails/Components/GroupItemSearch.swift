@@ -17,6 +17,7 @@ struct GroupItemSearch: View {
         VStack {
             HStack {
                 Text(groupData.groupName)
+                    .foregroundColor(.white)
                     .frame(maxWidth: 150, alignment: .leading)
                     .padding(.horizontal, 20)
                 Spacer().frame(width: 50)
@@ -41,6 +42,8 @@ struct GroupItemSearch: View {
             }
         }
         .frame(maxHeight: 45)
+        .background(.white.opacity(0.15))
+        .cornerRadius(15)
     }
 }
 
@@ -52,6 +55,6 @@ struct GroupItemSearch_Previews: PreviewProvider {
         return VStack {
             GroupItemSearch(groupController: GroupController(), groupData: Group(owner: "Someone", groupName: "Scrimblo Runners", members: ["ScrimbloMan"], messages: [])).environmentObject(authController)
             GroupItemSearch(groupController: GroupController(), groupData: Group(owner: "Someone", groupName: "Scrimblo Runners", members: ["Scrimblo64"], messages: [])).environmentObject(authController)
-        }
+        }.background(.black)
     }
 }
