@@ -15,52 +15,51 @@ struct HomeView: View {
     @State var isOnMakePost = false
     
     var body: some View {
-        ZStack {
-            Rectangle()
-            // Use the color gradient extension
-                .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
-                .edgesIgnoringSafeArea(.all)
-            
-            if homeController.isLoading {
-                Spacer()
-                ProgressView("Loading...")
-                    .foregroundColor(.white)
-                Spacer()
-            } else {
-                VStack {
-                    ScrollView {
-                        VStack {
-                            ForEach(homeController.postArray) {post in
-                                UserPost(post: post)
+        NavigationView {
+            ZStack {
+                Rectangle()
+                // Use the color gradient extension
+                    .fill(Color.gradient(colors: [Color(hex: 0x226EB6), Color(hex: 0x124271)]))
+                    .edgesIgnoringSafeArea(.all)
+                
+                if homeController.isLoading {
+                    Spacer()
+                    ProgressView("Loading...")
+                        .foregroundColor(.white)
+                    Spacer()
+                } else {
+                    VStack {
+                        ScrollView {
+                            VStack {
+                                ForEach(homeController.postArray) {post in
+                                    UserPost(post: post)
+                                }
+                            }
+                        }
+                        .padding(.vertical)
+                    }
+                    .onAppear {
+                        // fetch the posts
+                        if authController.currentUser != nil {
+                            homeController.setCurrentUser(userID: authController.currentUser?.userID)
+                            homeController.fetchPosts()
+                        } else {
+                            // for preview purposes
+                        }
+                    }
+                    VStack(spacing: 5) {
+                        Button(action: { isOnMakePost.toggle() }){
+                            Label("", systemImage: "plus.circle.fill")
+                                .padding(25)
+                                .font(.system(size: 50))
+                        }.fullScreenCover(isPresented: $isOnMakePost) {
+                            NavigationView {
+                                MakePost()
                             }
                         }
                     }
-                    .padding(.vertical)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 }
-                .onAppear {
-                    // fetch the posts
-                    if authController.currentUser != nil {
-                        homeController.setCurrentUser(userID: authController.currentUser?.userID)
-                        homeController.fetchPosts()
-                    } else {
-                        // for preview purposes
-                    }
-                }
-                VStack(spacing: 5) {
-                    Button(action: { }){
-                        Label("", systemImage: "plus.circle.fill")
-                            .padding(25)
-                            .font(.system(size: 50))
-                    }
-                    
-                    NavigationLink(
-                        destination: MakePost(homeController: homeController),
-                        isActive: $isOnMakePost,
-                        label: { EmptyView() }
-                    )
-                }
-                .navigationTitle("Another View")
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         }
     }

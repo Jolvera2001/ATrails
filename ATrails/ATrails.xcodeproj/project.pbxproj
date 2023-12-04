@@ -17,6 +17,7 @@
 		0D497BCC2AFE81BD007D6843 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0D497BCB2AFE81BD007D6843 /* FirebaseFirestoreSwift */; };
 		0D497BCE2AFE8542007D6843 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D497BCD2AFE8542007D6843 /* IntroView.swift */; };
 		0D497BD42AFE94BC007D6843 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D497BD32AFE94BC007D6843 /* HomeView.swift */; };
+		0D4F831F2B1E8FBC000D4432 /* PosterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4F831E2B1E8FBC000D4432 /* PosterController.swift */; };
 		0D53C29D2AFEBCDB00871149 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D53C29C2AFEBCDB00871149 /* MessageBubble.swift */; };
 		0D53C29F2AFEBDDF00871149 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D53C29E2AFEBDDF00871149 /* Message.swift */; };
 		0D80BF322B16AA8E007E71F6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D80BF312B16AA8E007E71F6 /* Launch Screen.storyboard */; };
@@ -44,6 +45,8 @@
 		0D497BC62AFE80BA007D6843 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D497BCD2AFE8542007D6843 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		0D497BD32AFE94BC007D6843 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0D4F831E2B1E8FBC000D4432 /* PosterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterController.swift; sourceTree = "<group>"; };
+		0D4F83202B1E973A000D4432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0D53C29C2AFEBCDB00871149 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 		0D53C29E2AFEBDDF00871149 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0D80BF312B16AA8E007E71F6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 		0D497BAC2AFE7C73007D6843 /* ATrails */ = {
 			isa = PBXGroup;
 			children = (
+				0D4F83202B1E973A000D4432 /* Info.plist */,
 				0D497BAD2AFE7C73007D6843 /* ATrailsApp.swift */,
 				0D80BF312B16AA8E007E71F6 /* Launch Screen.storyboard */,
 				0D497BB12AFE7C74007D6843 /* Assets.xcassets */,
@@ -156,6 +160,7 @@
 				0DCCEF612B140254002D2E39 /* ProfileController.swift */,
 				D48507B32B1905380065682F /* GroupController.swift */,
 				0DD5FAE12B1969BD00F70A63 /* MapController.swift */,
+				0D4F831E2B1E8FBC000D4432 /* PosterController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				D48507B42B1905380065682F /* GroupController.swift in Sources */,
 				0D497BAE2AFE7C73007D6843 /* ATrailsApp.swift in Sources */,
 				0D53C29F2AFEBDDF00871149 /* Message.swift in Sources */,
+				0D4F831F2B1E8FBC000D4432 /* PosterController.swift in Sources */,
 				0DE20C8E2B06F53300502D57 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,7 +394,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ATrails/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ATrails/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ATrails Needs to use your camera";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "ATrails Needs to use your location";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "ATrails Needs to use your camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -418,7 +427,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ATrails/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ATrails/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ATrails Needs to use your camera";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "ATrails Needs to use your location";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "ATrails Needs to use your camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

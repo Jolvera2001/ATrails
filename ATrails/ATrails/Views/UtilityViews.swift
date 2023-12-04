@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 
 // These views are for things like
@@ -20,9 +21,12 @@ struct UtilityViews: View {
 
 struct MakePost: View {
     @EnvironmentObject var authController: AuthController
-    @ObservedObject var homeController: HomeController
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var posterController = PosterController()
     
     @State private var textString: String = ""
+    @State private var selectedImage: UIImage? = nil
+    @State private var isImagePickerPresented = false
     
     var body: some View {
         ZStack {
@@ -34,7 +38,7 @@ struct MakePost: View {
                 VStack {
                     HStack(spacing: 40) {
                         Button {
-                            
+                            presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("Cancel")
                         }
@@ -46,7 +50,8 @@ struct MakePost: View {
                             .padding()
                         
                         Button {
-                            
+                            // do the post things then dismiss
+                            presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("Post")
                         }
@@ -102,6 +107,9 @@ struct MakePost: View {
                         }
                         .font(.title2)
                         .padding(10)
+                        .sheet(isPresented: $isImagePickerPresented) {
+                            ImagePicker(selectedImage: $selectedImage)
+                        }
                         
                         Button {
                             
@@ -117,6 +125,44 @@ struct MakePost: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var selectedImage: UIImage?
+    @Environment(\.presentationMode) private var presentationMode
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .photoLibrary
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: ImagePicker
+
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let pickedImage = info[.originalImage] as? UIImage {
+                parent.selectedImage = pickedImage
+            }
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
     }
 }
 
@@ -130,6 +176,6 @@ struct UtilityViews_Previews: PreviewProvider {
 
 struct MakePost_Previews: PreviewProvider {
     static var previews: some View {
-        MakePost(homeController: HomeController()).environmentObject(AuthController())
+        MakePost().environmentObject(AuthController())
     }
 }
