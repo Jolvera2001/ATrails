@@ -12,6 +12,7 @@ import CoreLocation
 struct HomeView: View {
     @EnvironmentObject var authController: AuthController
     @ObservedObject var homeController = HomeController()
+    @State var isOnMakePost = false
     
     var body: some View {
         ZStack {
@@ -51,7 +52,14 @@ struct HomeView: View {
                             .padding(25)
                             .font(.system(size: 50))
                     }
+                    
+                    NavigationLink(
+                        destination: MakePost(homeController: homeController),
+                        isActive: $isOnMakePost,
+                        label: { EmptyView() }
+                    )
                 }
+                .navigationTitle("Another View")
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         }
