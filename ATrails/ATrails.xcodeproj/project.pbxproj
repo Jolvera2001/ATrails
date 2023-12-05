@@ -109,6 +109,7 @@
 				0D497BC22AFE7D8E007D6843 /* Models */,
 				0D497BC42AFE7DD9007D6843 /* Views */,
 				0D497BB32AFE7C74007D6843 /* Preview Content */,
+				0D4F83232B1EA8B2000D4432 /* AddedDependencies */,
 			);
 			path = ATrails;
 			sourceTree = "<group>";
@@ -142,6 +143,13 @@
 				0D4F83212B1E9C1E000D4432 /* DevView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0D4F83232B1EA8B2000D4432 /* AddedDependencies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddedDependencies;
 			sourceTree = "<group>";
 		};
 		0D53C29B2AFEBCC600871149 /* Components */ = {
