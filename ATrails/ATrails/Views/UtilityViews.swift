@@ -131,9 +131,61 @@ struct MakePost: View {
 
 struct ProfileOptions: View {
     @EnvironmentObject var authController: AuthController
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var isButtonTapped = false
+    
     var body: some View {
         ZStack {
-            
+            Rectangle()
+            // Use the color gradient extension
+                .fill(Color.gradient(colors: [Color(hex: 0x7BB4E3), Color(hex: 0x99E7F8)]))
+                .edgesIgnoringSafeArea(.all)
+            VStack(spacing: 15) {
+                HStack {
+                    Button(action:{ presentationMode.wrappedValue.dismiss() }) {
+                        Text("<- Back")
+                    }
+                    .foregroundColor(.white)
+                    Text("Profile Options")
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .padding(15)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                HStack {
+                    Button(action:{ isButtonTapped.toggle() }) {
+                        Image(systemName: "person.circle.fill").font(.title)
+                        Text("Edit Profile")
+                    }
+                    .foregroundColor(.indigo)
+                    .fullScreenCover(isPresented: $isButtonTapped) {
+                        NavigationView {
+                            DevView()
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 60)
+                Divider().frame(maxWidth: 300)
+                HStack {
+                    Button(action: { isButtonTapped.toggle() }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right.fill").font(.title)
+                        Text("Log Out")
+                    }
+                    .foregroundColor(.indigo)
+                    .fullScreenCover(isPresented: $isButtonTapped) {
+                        NavigationView {
+                            DevView()
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 60)
+                Divider().frame(maxWidth: 300)
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
         }
     }
 }
@@ -193,6 +245,6 @@ struct MakePost_Previews: PreviewProvider {
 
 struct ProfileOptions_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView().environmentObject(AuthController())
+        ProfileOptions().environmentObject(AuthController())
     }
 }

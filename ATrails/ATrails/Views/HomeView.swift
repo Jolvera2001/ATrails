@@ -172,6 +172,7 @@ struct MapView: View {
     @EnvironmentObject var authController: AuthController
     @ObservedObject var mapController = MapController()
     
+    @State var isMapButtonTapped = false
     @State var region = MKCoordinateRegion(
         center: .init(latitude: 30.227173695531633, longitude: -97.75500147698011),
         span: .init(latitudeDelta: 0.08, longitudeDelta: 0.08)
@@ -198,12 +199,18 @@ struct MapView: View {
             VStack {
                 HStack {
                     Button {
+                        isMapButtonTapped.toggle()
                     } label: {
                         Label("", systemImage: "map.circle.fill")
                     }
                     .padding(.leading)
                     .font(.largeTitle)
                     .foregroundColor(Color("ABlue"))
+                    .fullScreenCover(isPresented: $isMapButtonTapped) {
+                        NavigationView {
+                            DevView()
+                        }
+                    }
                     
                     TextField("Search Places", text: $place)
                         .background(Color.white.opacity(0.85))
