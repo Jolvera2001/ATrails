@@ -31,6 +31,28 @@ struct UserPost: View {
                 // this is where either the media or hike will be, not both
                 // we can handle error checking that in the make a post view
                 // we may need to come back later to put this in
+                if let url = URL(string: post.media ?? "") {
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200)
+                        case .failure(let error):
+                            Text("Failed to load in image: \(error.localizedDescription)")
+                                .foregroundColor(.pink)
+                                .padding()
+                        case .empty:
+                            ProgressView()
+                        @unknown default:
+                            Text("Unknown State")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                } else {
+                    // nothing
+                }
                 
                 HStack {
                     Text(post.text)
@@ -38,6 +60,8 @@ struct UserPost: View {
                         .padding(.horizontal, 20)
                         .foregroundColor(.white)
                         .font(.title3)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -54,6 +78,10 @@ struct UserPost_Previews: PreviewProvider {
     static var previews: some View {
         let authController = AuthController()
         
-        UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is an ATrails post! Let's test to see how big we can make this post. Oh wow looks like it's handling it pretty well!"  )).environmentObject(authController)
+        ScrollView {
+            UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is an ATrails post! Let's test to see how big we can make this post. Oh wow looks like it's handling it pretty well!"  )).environmentObject(authController)
+            
+            UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is to test the access to the storage, I don't know why it's not formatting correctly. Oh now it is :)", media: "gs://atrails.appspot.com/images/sakuraFuji.jpg")).environmentObject(authController)
+        }
     }
 }

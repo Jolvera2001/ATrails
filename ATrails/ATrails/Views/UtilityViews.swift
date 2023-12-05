@@ -27,6 +27,7 @@ struct MakePost: View {
     @State private var textString: String = ""
     @State private var selectedImage: UIImage? = nil
     @State private var isImagePickerPresented = false
+    @State private var messagePrompt = ""
     
     var body: some View {
         ZStack {
@@ -51,7 +52,22 @@ struct MakePost: View {
                         
                         Button {
                             // do the post things then dismiss
-                            presentationMode.wrappedValue.dismiss()
+                            // this has a completion handler so it will run the dismiss() whenever it finishes
+                            // the only scary part of it doesn't do it correctly.
+                            // Will it still finish or crash?
+                            if (textString != "") {
+                                if selectedImage == nil {
+                                    posterController.createPost(currentUser: authController.currentUser!, postText: textString) {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                } else {
+                                    posterController.createPost(currentUser: authController.currentUser!, postText: textString, image: selectedImage!) {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+                            } else {
+                                messagePrompt = "You can't make an empty post"
+                            }
                         } label: {
                             Text("Post")
                         }
@@ -91,6 +107,9 @@ struct MakePost: View {
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
                             .lineLimit(6, reservesSpace: true)
+                        Text("\(messagePrompt)")
+                            .font(.title2)
+                            .foregroundColor(.pink)
                     }
                     .frame(maxHeight: .infinity, alignment: .top)
                 }

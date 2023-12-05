@@ -15,8 +15,63 @@ class PosterController: ObservableObject {
     
     var imageURL: String?
     
-    func createPost() {
+    // we could use two different createPost functions
+    func createPost(currentUser: User, postText: String, completion: @escaping () -> Void) {
+        let postToSave = Post(userID: currentUser.userID, username: currentUser.username, userPFP: currentUser.profilePictureURL ?? "", text: postText)
         
+        // now we put it into firestore
+        let postRef = db.collection("posts")
+        let data: [String: Any] = [
+            "id": postToSave.id,
+            "userID": postToSave.userID,
+            "username": postToSave.username,
+            "text": postToSave.text,
+            "userPFP": postToSave.userPFP,
+            "media": "",
+            "hike": "",
+            "postTimeStamp": Date()
+        ]
+        
+        postRef.addDocument(data: data) { error in
+            if let error = error {
+                print("There was an error: \(error.localizedDescription)")
+            } else {
+                print("file successfully saved")
+            }
+        }
+       
+    }
+    
+    func createPost(currentUser: User, postText: String, image: UIImage, completion: @escaping () -> Void) {
+        var postToSave = Post(userID: currentUser.userID, username: currentUser.username, userPFP: currentUser.profilePictureURL ?? "", text: postText)
+        
+        // this will set the URL string
+        uploadImage(image: image)
+        
+        postToSave.media = imageURL
+        
+        // now we put it into firestore
+        let postRef = db.collection("posts")
+        let data: [String: Any] = [
+            "id": postToSave.id,
+            "userID": postToSave.userID,
+            "username": postToSave.username,
+            "text": postToSave.text,
+            "userPFP": postToSave.userPFP,
+            "media": postToSave.media ?? "",
+            "hike": "",
+            "postTimeStamp": Date()
+        ]
+        
+        postRef.addDocument(data: data) { error in
+            if let error = error {
+                print("There was an error: \(error.localizedDescription)")
+            } else {
+                print("file successfully saved")
+                self.imageURL = ""
+            }
+        }
+       
     }
     
     func uploadImage(image: UIImage) {

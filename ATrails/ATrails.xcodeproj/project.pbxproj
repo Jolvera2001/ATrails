@@ -86,7 +86,6 @@
 			children = (
 				0D497BAC2AFE7C73007D6843 /* ATrails */,
 				0D497BAB2AFE7C73007D6843 /* Products */,
-				0D4F83312B1EABDA000D4432 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,13 +144,6 @@
 				0D4F83212B1E9C1E000D4432 /* DevView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0D4F83312B1EABDA000D4432 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0D53C29B2AFEBCC600871149 /* Components */ = {
