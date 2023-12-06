@@ -9,6 +9,8 @@ import Foundation
 import Firebase
 
 class AuthController: ObservableObject {
+    @Published var isLogged = false
+    @Published var isRegistered = false
     let db = Firestore.firestore()
     let uniqueID = UUID()
     let atrailsTeamID = "FEC9A016-0762-4309-B765-164A7074889E"
@@ -26,37 +28,13 @@ class AuthController: ObservableObject {
             "username": user.username,
             "fullname": user.fullname,
             "password": user.password,
-            "following": [atrailsTeamID],
-            "followers": [atrailsTeamID],
+            "following": initialFollowing,
+            "followers": initialFollowers,
             "profileBio": user.profileBio,
             "email": user.email
         ]) {error in
             if error == nil {
                 self.currentUser = user
-            }
-            completion(error)
-        }
-        
-        // then we should add the Atrails user as a follower and following user to instantiate the other documents
-        
-        // adding as following
-        db.collection("following").addDocument(data: [
-            "userID": userID,
-            "following": initialFollowing
-        ]) {error in
-            if error == nil {
-                
-            }
-            completion(error)
-        }
-        
-        // adding as follower
-        db.collection("followers").addDocument(data: [
-            "userID": userID,
-            "followers": initialFollowers
-        ]) {error in
-            if error == nil {
-                
             }
             completion(error)
         }

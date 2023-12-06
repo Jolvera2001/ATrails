@@ -9,8 +9,6 @@ import SwiftUI
 
 struct IntroView: View {
     @EnvironmentObject var authController: AuthController
-    @State private var isRegistered = false
-    @State private var isLogged = false
     
     var body: some View {
         NavigationStack() {
@@ -35,7 +33,7 @@ struct IntroView: View {
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
                     Spacer()
-                    NavigationLink(destination: RegistrationView(isRegistered: $isRegistered)) {
+                    NavigationLink(destination: RegistrationView()) {
                         Text("Register")
                             .frame(width: 350, height: 60)
                             .font(.title2)
@@ -47,7 +45,7 @@ struct IntroView: View {
                     .padding(2)
                     .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 2)
                     
-                    NavigationLink(destination: LoginView(isLogged: $isLogged)) {
+                    NavigationLink(destination: LoginView()) {
                         Text("I already have an account!")
                             .frame(width: 350, height: 60)
                             .font(.title2)
@@ -62,10 +60,6 @@ struct IntroView: View {
                     Spacer()
                         .frame(height: 40)
                     
-                    NavigationLink(destination: TabBarView(),
-                                   isActive: Binding<Bool>(get: {isLogged || isRegistered}, set: { _ in })) {
-                        
-                    }
                 }
             }
         }
@@ -74,8 +68,9 @@ struct IntroView: View {
 
 struct RegistrationView: View {
     @State private var user = User(userID: "", fullname: "", username: "", password: "", email: "", profileBio: "Something", followers: [], following: [])
-    @Binding var isRegistered: Bool
     @EnvironmentObject var authController: AuthController
+    
+    @State var isRegistered = false
     
     var body: some View {
         ZStack() {
@@ -128,11 +123,13 @@ struct RegistrationView: View {
                                 print("Registration failed: \(error.localizedDescription)")
                             } else {
                                 print("Registration successful!")
-                                isRegistered = true
+                                authController.isRegistered.toggle()
+                                isRegistered.toggle()
                                 authController.currentUser = user
                             }
                         }
-                    }) {
+                    })
+                    {
                         Text("Submit")
                             .frame(width: 350, height: 60)
                             .font(.title2)
@@ -143,6 +140,11 @@ struct RegistrationView: View {
                     .frame(maxWidth: .infinity)
                     .padding(2)
                     .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 2)
+                    .fullScreenCover(isPresented: $isRegistered) {
+                        NavigationView {
+                            TabBarView()
+                        }
+                    }
                     
                 }
             }
@@ -155,7 +157,7 @@ struct LoginView: View {
     
     @State private var username = ""
     @State private var password = ""
-    @Binding var isLogged: Bool
+    @State var isLogged = false
     
     var body: some View {
         ZStack() {
@@ -191,7 +193,8 @@ struct LoginView: View {
                     authController.login(username: username, password: password) {
                         success in
                         if success {
-                            isLogged = true
+                            authController.isLogged.toggle()
+                            isLogged.toggle()
                         } else {
                             print("Login was not successful")
                         }
@@ -200,6 +203,11 @@ struct LoginView: View {
                     Text("Submit")
                         .frame(width: 350, height: 60)
                         .font(.title2)
+                }
+                .fullScreenCover(isPresented: $isLogged) {
+                    NavigationView {
+                        TabBarView()
+                    }
                 }
                 .foregroundColor(.white)
                 .background(Color("ABlue"))
@@ -220,7 +228,7 @@ struct LoginView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-    IntroView()
+    IntroView().environmentObject(AuthController())
     }
 }
 
@@ -230,7 +238,7 @@ struct RegistrationView_Previews: PreviewProvider {
         struct IsRegisteredHolder: View {
             @State private var isRegistered = false
             var body: some View {
-                RegistrationView(isRegistered: $isRegistered)
+                RegistrationView().environmentObject(AuthController())
             }
         }
         // Use the container view in the preview
@@ -243,7 +251,7 @@ struct LoginView_Previews: PreviewProvider {
         struct isLoggedHolder: View {
             @State private var isLogged = false
             var body: some View {
-                LoginView(isLogged: $isLogged)
+                LoginView().environmentObject(AuthController())
             }
         }
         return isLoggedHolder()
