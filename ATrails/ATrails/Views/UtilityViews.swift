@@ -61,10 +61,12 @@ struct MakePost: View {
                                     posterController.createPost(currentUser: authController.currentUser!, postText: textString) {
                                         presentationMode.wrappedValue.dismiss()
                                     }
+                                    presentationMode.wrappedValue.dismiss()
                                 } else {
                                     posterController.createPost(currentUser: authController.currentUser!, postText: textString, image: selectedImageURL!) {
                                         presentationMode.wrappedValue.dismiss()
                                     }
+                                    presentationMode.wrappedValue.dismiss()
                                 }
                             } else {
                                 messagePrompt = "You can't make an empty post"
