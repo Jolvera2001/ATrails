@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in AuthController.login(username:password:completion:):AuthController.swift">
+         contextName = "Post.init(data:):Post.swift">
          <PersistentStrings>
             <PersistentString
-               value = "userDocument[&quot;fullname&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "self.currentUser">
+               value = "data[&quot;postTimestamp&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -28,10 +25,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Post.init(data:):Post.swift">
+         contextName = "closure #1 in AuthController.login(username:password:completion:):AuthController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "data[&quot;postTimestamp&quot;]">
+               value = "self.currentUser">
+            </PersistentString>
+            <PersistentString
+               value = "userDocument[&quot;fullname&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PosterController.uploadImage(image:):PosterController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.imageURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -43,6 +51,14 @@
             </PersistentString>
             <PersistentString
                value = "currentUserID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PosterController.createPost(currentUser:postText:image:completion:):PosterController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.imageURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

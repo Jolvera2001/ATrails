@@ -42,7 +42,7 @@ class PosterController: ObservableObject {
        
     }
     
-    func createPost(currentUser: User, postText: String, image: UIImage, completion: @escaping () -> Void) {
+    func createPost(currentUser: User, postText: String, image: URL, completion: @escaping () -> Void) {
         var postToSave = Post(userID: currentUser.userID, username: currentUser.username, userPFP: currentUser.profilePictureURL ?? "", text: postText)
         
         // this will set the URL string
@@ -74,33 +74,23 @@ class PosterController: ObservableObject {
        
     }
     
-    func uploadImage(image: UIImage) {
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            print("Could not get JPEG representation of image")
-            return
-        }
-        
+    func uploadImage(image: URL) {
         let storageRef = storage.reference()
         let imageName = generateShortUniqueString(length: 8)
         let imageRef = storageRef.child("images/\(imageName)")
         
-        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            guard let _ = metadata else {
-                print("Error uploading image: \(error?.localizedDescription ?? "Unknown error")")
+        let uploadTask = imageRef.putFile(from: image, metadata: nil) { metadata, error in
+            guard let metadata = metadata else {
                 return
             }
-            print("Image uploaded successfully.")
             
-            // getting the image URL
             imageRef.downloadURL{ (url, error) in
-                if let downloadedURL = url {
-                    self.imageURL = downloadedURL.absoluteString
-                } else {
-                    print("Error fetching URL: \(error?.localizedDescription ?? "")")
+                guard let downloadURL = url else {
+                    return
                 }
+                self.imageURL = downloadURL.absoluteString
             }
         }
-        
     }
     
     func generateShortUniqueString(length: Int) -> String {

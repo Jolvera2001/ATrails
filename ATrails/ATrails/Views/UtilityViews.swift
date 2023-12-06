@@ -25,7 +25,8 @@ struct MakePost: View {
     @ObservedObject var posterController = PosterController()
     
     @State private var textString: String = ""
-    @State private var selectedImage: UIImage? = nil
+    @State var selectedImage: UIImage? = nil
+    @State var selectedImageURL: URL?
     @State private var isImagePickerPresented = false
     @State private var messagePrompt = ""
     
@@ -61,7 +62,7 @@ struct MakePost: View {
                                         presentationMode.wrappedValue.dismiss()
                                     }
                                 } else {
-                                    posterController.createPost(currentUser: authController.currentUser!, postText: textString, image: selectedImage!) {
+                                    posterController.createPost(currentUser: authController.currentUser!, postText: textString, image: selectedImageURL!) {
                                         presentationMode.wrappedValue.dismiss()
                                     }
                                 }
@@ -138,7 +139,7 @@ struct MakePost: View {
                         .font(.title2)
                         .padding(10)
                         .sheet(isPresented: $isImagePickerPresented) {
-                            ImagePicker(selectedImage: $selectedImage)
+                            ImagePicker(selectedImage: $selectedImage, selectedImageURL: $selectedImageURL)
                         }
                         
                         Button {
@@ -224,6 +225,7 @@ struct ProfileOptions: View {
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
+    @Binding var selectedImageURL: URL?
     @Environment(\.presentationMode) private var presentationMode
 
     func makeCoordinator() -> Coordinator {
@@ -249,6 +251,16 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let pickedImage = info[.originalImage] as? UIImage {
                 parent.selectedImage = pickedImage
+                
+                if let imageData = pickedImage.jpegData(compressionQuality: 1.0) {
+                    let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("pickedImage.jpg")
+                    do {
+                        try imageData.write(to: tempURL)
+                        parent.selectedImageURL = tempURL
+                    } catch {
+                        print("Error writing image data: \(error.localizedDescription)")
+                    }
+                }
             }
             parent.presentationMode.wrappedValue.dismiss()
         }

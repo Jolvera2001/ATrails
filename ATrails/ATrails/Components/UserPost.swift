@@ -38,7 +38,8 @@ struct UserPost: View {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 200, height: 200)
+                                .frame(width: .infinity, height: 250)
+                                .cornerRadius(10)
                         case .failure(let error):
                             Text("Failed to load in image: \(error.localizedDescription)")
                                 .foregroundColor(.pink)
@@ -81,7 +82,7 @@ struct UserPost_Previews: PreviewProvider {
         ScrollView {
             UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is an ATrails post! Let's test to see how big we can make this post. Oh wow looks like it's handling it pretty well!"  )).environmentObject(authController)
             
-            UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is to test the access to the storage, I don't know why it's not formatting correctly. Oh now it is :)", media: "gs://atrails.appspot.com/images/sakuraFuji.jpg")).environmentObject(authController)
+            UserPost(post: Post(userID: "admin", username:"admin", userPFP: "https://www.nyip.edu/images/cms/photo-articles/the-best-place-to-focus-in-a-landscape.jpg", text: "This is to test the access to the storage, I don't know why it's not formatting correctly. Oh now it is :)", media: "https://firebasestorage.googleapis.com:443/v0/b/atrails.appspot.com/o/images%2FmVxIvjla?alt=media&token=05672d57-20d2-4507-888d-1d72a5915947")).environmentObject(authController)
         }
     }
 }
